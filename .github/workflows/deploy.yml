@@ -17,6 +17,12 @@ jobs:
       - name: Generate deployment package
         run: zip -r deploy.zip . -x '*.git*'
 
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: arn:aws:iam:1235293871974:role:/my-github-actions-role
+          aws-region: us-east-1
+
       - name: Deploy to EB
         uses: einaregilsson/beanstalk-deploy@v18
         with:
